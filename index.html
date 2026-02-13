@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corrector Pro</title>
+
+<link rel="stylesheet" href="styles.css">
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+<h1>Corrector Pro</h1>
+
+<div id="editor" contenteditable="true" spellcheck="false"></div>
+
+<br>
+<button onclick="corregirTodo()">Corregir todo</button>
+<button id="toggleDark">Modo oscuro</button>
+
+<p id="contador">Errores: 0</p>
+
+<div id="info">Toca una palabra subrayada para corregirla.</div>
+
+<script src="script.js"></script>
+</body>
+</html>

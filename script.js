@@ -29,17 +29,49 @@ editor.addEventListener("click", e => {
   }
 });
 
+/* ========= CURSOR (ARREGLO) ========= */
+
 function guardarCursor() {
   const sel = window.getSelection();
-  return sel.rangeCount ? sel.getRangeAt(0).cloneRange() : null;
+  if (!sel.rangeCount) return 0;
+
+  const range = sel.getRangeAt(0);
+  const preRange = range.cloneRange();
+  preRange.selectNodeContents(editor);
+  preRange.setEnd(range.endContainer, range.endOffset);
+
+  return preRange.toString().length;
 }
 
-function restaurarCursor(range) {
-  if (!range) return;
-  const sel = window.getSelection();
-  sel.removeAllRanges();
-  sel.addRange(range);
+function restaurarCursor(pos) {
+  const selection = window.getSelection();
+  const range = document.createRange();
+
+  let charCount = 0;
+  let nodeStack = [editor];
+  let node;
+  let found = false;
+
+  while (!found && (node = nodeStack.pop())) {
+    if (node.nodeType === 3) {
+      const nextCount = charCount + node.length;
+      if (pos <= nextCount) {
+        range.setStart(node, pos - charCount);
+        range.collapse(true);
+        found = true;
+      }
+      charCount = nextCount;
+    } else {
+      let i = node.childNodes.length;
+      while (i--) nodeStack.push(node.childNodes[i]);
+    }
+  }
+
+  selection.removeAllRanges();
+  selection.addRange(range);
 }
+
+/* ==================================== */
 
 function corregirMayusculas(texto) {
   if (!texto) return texto;
@@ -51,7 +83,8 @@ function corregirMayusculas(texto) {
 }
 
 async function corregir() {
-  const cursor = guardarCursor();
+  const cursorPos = guardarCursor();
+
   let texto = editor.innerText;
   texto = corregirMayusculas(texto);
 
@@ -69,7 +102,9 @@ async function corregir() {
   }
 
   editor.innerHTML = html;
-  restaurarCursor(cursor);
+
+  restaurarCursor(cursorPos);
+
   contador.innerText = "Errores: " + totalErrores;
   info.innerHTML = explicaciones || "Sin errores detectados.";
 }
@@ -101,4 +136,4 @@ if ('serviceWorker' in navigator) {
       .then(reg => console.log('ServiceWorker registrado:', reg.scope))
       .catch(err => console.log('Error ServiceWorker:', err));
   });
-                                               }
+}

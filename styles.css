@@ -1,0 +1,120 @@
+@font-face {
+  font-family: 'HandwritingX';
+  src: local('Handwriting X');
+}
+
+body {
+  font-family: 'HandwritingX', 'Roboto', 'Arial', sans-serif;
+  background: #f0f2f5;
+  padding: 20px;
+  color: #111;
+  transition: background 0.3s, color 0.3s;
+}
+
+h1 {
+  text-align: center;
+  color: #0077b6;
+  margin-bottom: 20px;
+}
+
+#editor {
+  min-height: 180px;
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  outline: none;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #111;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+#editor:focus {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.error {
+  text-decoration: underline red;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  background: #4fc3f7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-top: 12px;
+}
+
+button:hover {
+  background: #039be5;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.25);
+  transform: translateY(-1px);
+}
+
+#contador {
+  font-weight: bold;
+  margin-top: 15px;
+  color: #0077b6;
+}
+
+#info {
+  margin-top: 15px;
+  background: #fff;
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  max-height: 220px;
+  overflow-y: auto;
+  transition: background 0.3s, color 0.3s;
+}
+
+#info p {
+  margin: 6px 0;
+  line-height: 1.4;
+}
+
+#info b {
+  color: #0077b6;
+}
+
+/* ==========================
+   Modo oscuro
+========================== */
+body.dark {
+  background: #121212;
+  color: #eee;
+}
+
+body.dark h1 {
+  color: #4fc3f7;
+}
+
+body.dark #editor {
+  background: #1e1e1e;
+  color: #eee;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+}
+
+body.dark #info {
+  background: #1e1e1e;
+  color: #eee;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+body.dark button {
+  background: #4fc3f7;
+  color: #111;
+}
+
+body.dark button:hover {
+  background: #039be5;
+                             }
